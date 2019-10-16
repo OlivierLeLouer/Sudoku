@@ -13,6 +13,13 @@ public class Board {
 		initialize();
 	}
 	
+	/**
+	 * @return the allSquaresUnresolved
+	 */
+	public List<Square> getAllSquaresUnresolved() {
+		return allSquaresUnresolved;
+	}
+	
 	private void initialize() {
 		content = new Square[4][4];
 		allSquaresUnresolved = new ArrayList<Square>(9);

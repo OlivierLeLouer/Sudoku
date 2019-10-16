@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - SudokuSolver",
+            "request": "launch",
+            "mainClass": "olr.sudoku.solver.SudokuSolver",
+            "projectName": "Sudoku"
+        }
+    ]
+}

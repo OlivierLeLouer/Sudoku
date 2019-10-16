@@ -5,6 +5,7 @@ import java.util.List;
 
 import olr.sudoku.model.Board;
 import olr.sudoku.model.Case;
+import olr.sudoku.model.Square;
 
 public class SudokuPrinter {
 
@@ -18,6 +19,23 @@ public class SudokuPrinter {
 			Iterator<Case> it = list.iterator();
 			while (it.hasNext()) System.out.print(it.next());
 			System.out.println("");
+		}
+	}
+
+	public void printAllPossibilities(Board b) {
+		List<Square> list = b.getAllSquaresUnresolved();
+		Iterator<Square> it = list.iterator();
+		while (it.hasNext()) {
+			Square s = it.next();
+			System.out.println(s);
+			Iterator<Case> itc = s.getAllCases().iterator();
+			while (itc.hasNext()) {
+				Case c = itc.next();
+				if (c.getCurrentValue() == 0) {
+					System.out.print(c.getLineNumber() + " / " + c.getColumnNumber() + " : ");
+					System.out.println(c.getAllPossibleValues());
+				}
+			}
 		}
 	}
 }

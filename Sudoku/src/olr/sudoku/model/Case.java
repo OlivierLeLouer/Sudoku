@@ -14,6 +14,20 @@ public class Case {
 	int lineNumber;
 	int columnNumber;
 	
+	/**
+	 * @return the columnNumber
+	 */
+	public int getColumnNumber() {
+		return columnNumber;
+	}
+
+	/**
+	 * @return the lineNumber
+	 */
+	public int getLineNumber() {
+		return lineNumber;
+	}
+	
 	public Case(int l, int c, Square s) {
 		super();
 		initialize(l, c, s);
@@ -56,7 +70,7 @@ public class Case {
 	
 	public List<Integer> getAllPossibleValues() {
 		List<Integer> result = new ArrayList<Integer>();
-		for (int i= 0; i< 10; i++) {
+		for (int i= 1; i< 10; i++) {
 			if (possibleValues[i]) {
 				result.add(i);
 			}

@@ -19,10 +19,13 @@ public class SudokuSolver {
 	public static void main(String[] args) {
 		SudokuLoader sl = new SudokuLoader();
 		Board b = sl.loadFrom(CurrentSudokuExpert);
+		SudokuPrinter sp = new SudokuPrinter();
+		sp.print(b);
 		SudokuSolver sv = new SudokuSolver(b);
 		sv.solve();
-		SudokuPrinter sp = new SudokuPrinter();
 		sp.print(sv.board);
+		System.out.println("Valeurs possibles");
+		sp.printAllPossibilities(b);
 	}
 	
 	private Board board;
