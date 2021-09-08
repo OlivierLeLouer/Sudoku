@@ -10,6 +10,7 @@ public class Case {
 	boolean isOriginal = false;
 	boolean alterable;
 	boolean[] possibleValues;
+	List<Integer> testedValues;
 	Square square;
 	int lineNumber;
 	int columnNumber;
@@ -40,6 +41,7 @@ public class Case {
 		currentValue = 0;
 		alterable = true;
 		possibleValues = new boolean[10];
+		testedValues = new ArrayList<Integer>();
 		for (int i = 0; i < 10; i++) {
 			possibleValues[i] = true;
 		}
@@ -86,6 +88,33 @@ public class Case {
 		return false;
 	}
 	
+	public boolean isPossibleToMakeATry() {
+		List<Integer> l = getAllPossibleValues();
+		if (l.size() > 1)	{
+			for (Integer currentInteger : l) {
+				if (!testedValues.contains(currentInteger)) {
+					testedValues.add(currentInteger);
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	public Integer getValueToTest() {
+		return testedValues.get(testedValues.size() - 1);
+	}
+
+	public boolean check () throws Exception {
+		if (!alterable && getCurrentValue() == 0) {
+			throw new Exception("Case non modifiable et pas de valeur affectée");
+		}
+		if (getAllPossibleValues().isEmpty()) {
+			throw new Exception("Case sans valeur possible");
+		}
+		return true;
+	}
+
 	public boolean determineFinalValue() {
 		if (!alterable) {
 			return false;
@@ -120,6 +149,10 @@ public class Case {
 	
 	public int getCurrentValue() {
 		return currentValue;
+	}
+
+	public boolean isModificationAuthorized() {
+		return alterable;
 	}
 
 	@Override

@@ -14,12 +14,14 @@ public class SudokuPrinter {
 	}
 	
 	public void print(Board b) {
+		System.out.println("Beginning of Board ..");
 		for (int l = 1; l < 10; l++) {
 			List<Case> list = b.getAllCasesFromLine(l);
 			Iterator<Case> it = list.iterator();
 			while (it.hasNext()) System.out.print(it.next());
 			System.out.println("");
 		}
+		System.out.println("- - - - - - - - -");
 	}
 
 	public void printAllPossibilities(Board b) {
@@ -31,11 +33,12 @@ public class SudokuPrinter {
 			Iterator<Case> itc = s.getAllCases().iterator();
 			while (itc.hasNext()) {
 				Case c = itc.next();
-				if (c.getCurrentValue() == 0) {
+				if (c.isModificationAuthorized()) {
 					System.out.print(c.getLineNumber() + " / " + c.getColumnNumber() + " : ");
 					System.out.println(c.getAllPossibleValues());
 				}
 			}
+			System.out.println("------------");
 		}
 	}
 }

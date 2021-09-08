@@ -7,7 +7,7 @@ public class Board {
 
 	Square[][] content;
 	List<Square> allSquaresUnresolved;
-	
+
 	public Board() {
 		super();
 		initialize();
@@ -18,6 +18,15 @@ public class Board {
 	 */
 	public List<Square> getAllSquaresUnresolved() {
 		return allSquaresUnresolved;
+	}
+
+	public void determineAllSquaresUnresolved() {
+		List<Square> toRemove = new ArrayList<Square>();
+		for (Square square : allSquaresUnresolved) {
+			if (!square.isUnresolved())
+				toRemove.add(square);
+		}
+		allSquaresUnresolved.removeAll(toRemove);
 	}
 	
 	private void initialize() {
@@ -80,4 +89,34 @@ public class Board {
 		return result;
 	}
 
+	public boolean isSolved() {
+		return allSquaresUnresolved.isEmpty();
+	}
+
+
+	public Case searchFirstCaseToTry() {
+		for (int lineNumber = 1; lineNumber < 10 ; lineNumber++) {
+			List<Case> allCases = this.getAllCasesFromLine(lineNumber);
+			for (Case case1 : allCases) {
+				if (case1.isPossibleToMakeATry()) return case1;
+			}
+		}
+		return null;
+	}
+
+	public String toStringToSave(Case c) {
+		StringBuilder result = new StringBuilder();
+		for (int lineNumber = 1; lineNumber < 10 ; lineNumber++) {
+			List<Case> allCases = this.getAllCasesFromLine(lineNumber);
+			for (Case case1 : allCases) {
+				if (case1.equals(c)) {
+					result.append(String.valueOf(c.getValueToTest()));	
+				} else {
+					result.append(String.valueOf(case1.getCurrentValue()));
+				}
+			}
+			result.append("\r");
+		}
+		return result.toString();
+	}
 }
